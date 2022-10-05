@@ -1,0 +1,76 @@
+                            8.function modifiers
+
+Allow to reuse the code
+
+Example
+
+    pragma solidity ^0.8.7
+
+    contract FunctionModifier{
+        uint public num = 123;
+
+        //check the cdtn, if it is true runs next
+        function add() external view returns(uint) {
+            require(num != 123, 'num == 123');
+
+            return num += 1;
+        }
+
+        //check the cdtn, if it is true runs next
+        function sub() external view returns(uint) {
+            require(num != 123, 'num == 123');
+
+            return num -= 1;
+        }
+    }
+
+Here we can create the custom Function modifier to check the cdtn
+nd re use the code.
+
+
+Example
+
+pragma solidity ^0.8.7
+
+    contract FunctionModifier{
+        uint public num = 123;
+
+        //Custom Function modifier
+        modifier checkNum(){
+            require(num != 123, 'num == 123');
+            // Underscore is a special character only used inside
+            // a function modifier and it tells Solidity to
+            // execute the rest of the code.
+            _;
+        }
+
+        //check the cdtn, if it is true runs next
+        function add() external checkNum returns(uint) {
+            
+
+            return num += 1;
+        }
+
+        //check the cdtn, if it is true runs next
+        function sub() external checkNum returns(uint) {
+            
+            return num -= 1;
+        }
+    }
+
+    we can use multiple FunctionModifier
+
+    we can execute code before and after too.
+
+    // Modifiers can be called before and / or after a function.
+    // This modifier prevents a function from being called while
+    // it is still executing.
+    modifier noReentrancy() {
+        require(!locked, "No reentrancy");
+
+        locked = true;
+        //Executes the called function
+        _;
+        //And then execute this code
+        locked = false;
+    }

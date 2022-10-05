@@ -1,0 +1,19 @@
+                5.Default Value
+
+The State Variable and Local has Default Value in solidity.
+
+The Default value sof some Variables
+
+Default Values
+bool --> false
+uint --> 0
+int  --> 0
+address --> 0x0000000000000000000000000000000000000000
+bytes32 --> check in remix ide
+
+there Default Values for below data Types too. we will see that later.
+
+Mapping,
+Struct,
+enum,
+fixed size Array 

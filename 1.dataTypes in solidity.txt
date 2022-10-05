@@ -1,0 +1,144 @@
+                1.DataTypes in Solidity
+
+
+There are two types of DataTypes
+    1.Value Types
+    2.Reference Types
+
+
+
+1.Value Types are :
+    A value type stores its data directly in the memory it owns. 
+    Variables of this type are duplicated whenever they appear in functions or assignments. 
+    A value type will maintain an independent copy of any duplicated variables. 
+    Therefore, a change in the value of a duplicated variable will not affect the original variable.
+    
+    Boolean
+        example : bool public b = false;
+                  Holds the Value true or false
+    
+    Signed Integers
+        example : int public  i = -122;
+                  int = int256 ranges -2 ** 255 to 2 ** 255 -1
+                        int8, int32,...., int128....
+                        
+    Unsigned Integers
+        example : uint public  u16 = 1890; // positive numbers only
+                  uint = uint256 ranges 0 to 2 ** 255 -1
+                         uint8, uint32,...., uint128....
+    Addresses 
+        hold values upto 20B or 160bits
+        used to store the Etherum address
+        example : address public  myAddress =
+                            0xb794f5ea0ba39494ce839613fffba74279579268;
+
+    Enums
+        Enums, or enumeration, values in Solidity consist of user-defined data types. 
+        This data type is used explicitly for constant values
+        example :  
+            //creating a dataType
+            enum Button { ON, OFF }
+
+             // declaring a variable of type enum
+            Button button;
+
+            // set the value of button to ON
+            button = Button.ON;
+
+    Bytes 
+        Solidity provides a wide range — from bytes1 to bytes32
+         The data type bytes1 represents one byte, while bytes32 represents 32B
+        example :
+            bytes1 ee = 'd'
+            bytes32 b32 = '123344566789012345678990123456789012'
+
+
+
+2.Reference Type :
+    store (or “reference”) the address of the data’s location and do not directly share the data
+    since they deal with storage locations, Data location affects the amount of gas used in a transaction and therefore can negatively impact smart contract development performance
+    reference variables point a user to the location of value storage, and these can take up more than 32B of memory in size.
+    Two separate variables can refer to the exact location, and any change in one variable can affect the other
+
+
+    Arrays are a group of variables of the same data type
+    type[] arrayName;
+
+    Fixed-Size Arrays
+        Fixed-size arrays have a predefined size when they are declared.
+    
+        Example : uint[6] age =  [ 60, 70, 80, 90, 100, 110];
+                            (OR)
+                    uint [6] age;
+                    age  = [ 60, 7, 8, 9, 10, 11];
+                        we do like  this too
+
+    Dynamic Size Arrays
+        Dynamic arrays do not have a predefined size when they are declared
+        Example : int[] arrayName; 
+                        arrayName = new int[](5); //  their size is determined at run time.
+
+    Array members 
+        Array members Property
+            Length: deals with the number of elements; it is used to count the number of elements in an array
+                    The length of dynamically sized arrays is set to adjust their size
+            Push: a member of dynamic storage arrays used to add an element to the array at the last position
+            Pop: a member that removes elements from the end of a dynamic array of bytes and storage (not strings)
+
+    Byte Arrays
+        byte array is a dynamic array that can hold any number of bytes.
+         differs from the bytes value type we discussed earlier, which can take 32B for each variable.
+         A byte array holds all of the bytes together tightly.
+
+        Example :
+                bytes localBytes = new bytes(0) ;
+                        (OR)
+                bytes localBytes ;
+                localBytes= new bytes (10) ;
+                        (OR)
+                
+                localBytes = "Ritesh Modi";
+
+                localBytes.push(byte(10));
+                simBytes.length = 5; // setting bytes length to 5 bytes
+
+
+    String arrays
+        String arrays are dynamic
+        does not have an index 
+        so it lacks array members such as length, push, and pop
+         need to perform any of these functions, string variables should be converted to bytes first, and then converted back to strings after the operation
+
+        Example :
+        String name = ' Lorem Modi " ;
+
+        // convert back to bytes
+            Bytes  ByteName = bytes ( name ) ;
+
+    Structs
+        refers to a new (or custom) data type
+        struct keyword to define a structure
+        made up of multiple variables, 
+        which can be both value type and reference type.
+        they cannot contain members of their type.
+        struct A can contain struct B, 
+        but struct A cannot contain struct A.
+
+        Example :
+        struct patient {
+            string name;
+            string age;
+            uint16 gender;
+         }
+
+    Mapping
+        mapping(key => value) <access specifier> <name>
+
+        similar to a hashtable or dictionary in other programming languages
+        store data in the form of key-value pairs
+        key can be any of the inbuilt data types except for reference types, and the value can be any type
+        retrieve data using the key
+
+        Example :
+        // Creating a mapping
+            mapping (string => string) result;

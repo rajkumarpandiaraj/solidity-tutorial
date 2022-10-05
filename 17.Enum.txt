@@ -1,0 +1,45 @@
+                                17.Enum
+
+used to define predefined values.
+
+pragma solidity ^0.8.7;
+
+contract Enum{
+
+    //defining the pre-defined Values
+    //First position in the Values(None) is the defaultvalue of this dataType.
+    enum Status{
+        None,
+        Pending,
+        Shipped,
+        Completed,
+        Rejected,
+        Canceled
+    }
+
+    Status public status;
+
+    Struct Order{
+        address buyer;
+        Status status;
+    } 
+
+    Order[] public orders;
+
+    function get() view external returns(Status){
+        return status;
+    }
+
+    function set(Status _status) external{
+        status = _status;
+    }
+
+    function ship() external{
+        status = Status.shipped;
+    }
+
+    function reset() external {
+        delete status;
+        //reset to defaultVAlue zero(None)
+    }
+}

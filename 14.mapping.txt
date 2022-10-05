@@ -1,0 +1,28 @@
+                        14.mapping
+
+//Mapping
+//declare mapping(simple and nested)
+//set, get, delete
+
+
+pragma solidity ^0.8.5
+
+contract Mapping{
+
+ // Mapping from address to uint
+    mapping(address => uint) public myMap;
+
+    // Nested mapping (mapping from address to another mapping)
+    mapping(address => mapping(uint => bool)) public nested;
+
+    //set
+    myMap[msg.sender] = 123;
+
+    //get
+    uint public num = myMap[msg.sender];
+
+    //delete
+    // Reset the value to the default value.
+    delete myMap[msg.sender];
+
+}

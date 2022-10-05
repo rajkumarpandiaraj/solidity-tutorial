@@ -1,0 +1,40 @@
+
+                39.Delete Contract
+
+
+Self Destruct:
+
+Contracts can be deleted from the blockchain by calling selfdestruct.
+
+selfdestruct sends all remaining Ether stored in the contract to a designated address.
+
+Vulnerability
+A malicious contract can use selfdestruct to force sending Ether to any contract.
+
+
+// selfdestruct 
+    -- Deletes Contract
+    -- sends the ether to some contract withput having the fallback or receive
+
+
+Example :
+
+    pragms solidity ^0.8.10;
+
+    contract Kill{
+        constructor() payable {};
+
+        function kill() external {
+            selfdestruct(payable(msg.sender));
+        }
+    }
+
+    contract Helper {
+        function getBalanace() external view returns(uint) {
+            retrn address(this).balance;
+        }
+
+        function kill(Kill _kill) external {
+            _kill.kill()
+        }
+    }

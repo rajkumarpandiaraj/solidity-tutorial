@@ -1,0 +1,17 @@
+                        25.Visibility
+
+
+Visibility :
+
+    private -->  only inside the contract not outside the contract.
+    internal -->  only inside the contract and it’s child contract.
+    public --> only inside the contract and outside the contract
+    external --> only from outside the contract (other contracts).
+            there is an hack to call the external functio0n inside the same contract using this keyword
+                let assume foo is a external function
+                in the other function inside the same contract we can call the foo function using this keyword like this
+                    this.foo()
+                    But this is gas ineffecient, so don't do that
+
+This are applicable for both function and variables
+

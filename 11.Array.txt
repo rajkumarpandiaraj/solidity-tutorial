@@ -1,0 +1,46 @@
+                    11.Array
+
+//Array -dynamic  and fixed array.
+//Initialization
+//push,get,update,delete,pop,length
+//create Array in memory
+//Returning array from function
+
+pragma solidity ^0.8.7;
+
+contract Array{
+    //declaring Dynamic Array
+    uint[] public num;
+
+    //declaring Fixed Size array
+    uint[3] public fixedNums;
+
+    //Initialization
+    num = [1,2,3];
+    fixedNums = [4,5,6];
+
+    //push,get,update,delete,pop,length
+    num.push(4); //[1,2,3,4]
+    num[2]; //3
+    num[2] = 45; //[1,2,45,4]
+    delete num[2]; //delete the value to the Default value
+                   //Default value of uint is zer0
+                   //[1,2,0,4]
+                   //Deletes doesn't change the length of the array.
+
+    num.pop(); //[1,2,0]
+    num.length //3
+
+    we can't do this method in fixedSize Array and array in memory.
+    we can only get and update the value in the Fixed Array.
+
+    //create Array in memory
+    uint[] memory a = new uint[](5);
+
+    //Returning array from function
+    function returnArray() external view return(uint[] memory){
+        return num;
+    }
+    //returning an array from the function is not recommended
+    //coz, it consumes more gas.
+}

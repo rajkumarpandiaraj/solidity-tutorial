@@ -1,0 +1,29 @@
+                    19.storage vs memory vs calldata
+
+storage
+    It is where all state variables are stored. 
+    Because state can be altered in a contract (for example, within a function), 
+    storage variables must be mutable. 
+    However, their location is persistent, 
+    and they are stored on the blockchain. 
+
+
+ memory
+    Memory is reserved for variables that are defined within the scope of a function.                      
+
+calldata
+    Calldata is an immutable, temporary location where function arguments are stored, and behaves mostly like memory.
+
+
+pragma solidity ^0.8.7;
+
+contract Storage{
+
+    //store the data in storage(block chain)
+    string public text;
+
+
+    function set(string calldata _text) external view{
+        text = _text
+    }
+}

@@ -1,0 +1,41 @@
+                            0.Hello World
+
+In hello.sol
+
+// SPDX-License-Identifier: MIT
+// compiler version must be greater than or equal to 0.8.13 and less than 0.9.0
+pragma solidity ^0.8.13;
+
+contract HelloWorld {
+    string public greet = "Hello World!";
+}
+
+///////////////////////////////////////////////////////
+
+Extension for solidity is '.sol'
+
+// SPDX-License-Identifier: MIT
+at first we have to define the MIT licenece to avoid the compiler warning.
+
+
+
+pragma solidity ^0.8.13;
+//Defines the solidity compiler version .....
+//^ --> means >=
+//Using specific version like "pragma solidity 0.8.13;" is the best practice.
+
+
+
+contract HelloWorld {
+    string public greet = "Hello World!";
+}
+// Create the contract using the key word contract
+//And followed by use the contract name and the curly braces
+
+
+string public greet = "Hello World!";
+//string --> dataType of the variable
+//public --> we have the read acces to the variable only we deployed to the variable.
+//greet --> variable name.
+//=  --> assignment operator.
+//"Hello World!"; --> value and then semi colon

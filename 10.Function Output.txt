@@ -1,0 +1,34 @@
+                    10.Function Output
+
+
+how to 
+    return multiple Output
+    return Named Output
+    destructuring assignment
+
+    contract FunctionOutput{
+        function returnMany() public pure returns(uint, bool){
+            return (1,true)
+        }
+
+        //Named Output
+        function named() public pure returns(uint x, bool b){
+            return (1,true)
+        }
+
+        function _named() public pure returns(uint x, bool b){
+            //If we use like this we don't need return statement
+            //In this case we can save some case
+            x = 1;
+            b = true
+        }
+
+        //destructuring
+        function call() public{
+            (_x, _b) = returnMany();
+            
+            //If we don't need the firest arg
+            (,b) = returnMany();
+        }
+        
+    }

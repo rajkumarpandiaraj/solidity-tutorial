@@ -1,0 +1,65 @@
+                    22.Multiple Inheritance
+
+
+In the case of Multiple Inheritance
+    -> order of the most base like to derived is important
+
+      x
+    /  |
+   Y   |
+   \   |
+      Z
+base like is the least number of inherited contract
+
+here z inherits x and Y
+Y inherits x
+x inherits no one
+
+then the order is
+x,y,z
+
+
+Example :
+    contract X {
+
+    // vitrual keyword allows the child to modify the function
+    function foo() public pure virtual returns(string){
+        return 'X-F'
+    } 
+
+    function bar() public pure virtual returns(string){
+        return 'X-bar'
+    } 
+
+    function baz() public pure returns(string){
+        return 'X-baz'
+    } 
+}
+
+contract Y is X {
+
+    //override keyword allows to override the parent function
+    //since we want to ovverride this function in its child, we adding virtual keyword
+    function foo() public pure virtual override returns(string){
+        return 'X-F'
+    } 
+
+    function bar() public pure virtual override returns(string){
+        return 'X-bar'
+    } 
+}
+
+// Here the base like order is important
+// if we use Y,X then the contract not going to deploy
+contract Z is X,Y  {
+
+    //override keyword allows to override the parent function
+    function foo() public pure override(X,Y) returns(string){
+        return 'Z-F'
+    } 
+
+    //override(Y,X) order doesn't matter 
+    function bar() public pure override(Y,X) returns(string){
+        return 'Z-bar'
+    } 
+}

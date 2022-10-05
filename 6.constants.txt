@@ -1,0 +1,16 @@
+                            6.constants
+
+constants 
+    you can declare state variable as a constant, when you knew thatvariable is not going to change.
+    if we declare a state variable as a constant, the gas is low when u use that constant.
+    we usually capitalize the constant Variable
+
+decal state variable as constant
+
+example 
+    pragma solidity ^0.8.7;
+
+    contract constants{
+        address public constant MY_ADDRESS = 'sdfgdfgdfgdfdhhd';
+        address public constant MY_UINT = 123;
+    }

@@ -1,0 +1,50 @@
+                            24.Calling the parent Function
+
+
+we can the call the parent function is two ways
+    --> directly calling the parent function
+        parentName.FunctionName()
+
+    --> calling using the super keyword
+        call all the parent function
+
+    
+
+contract A {
+    event Log(string message);
+
+    function foo() public virtual{
+        emit Log(A.foo);
+    }
+    function bar() public virtual{
+        emit Log(A.bar);
+    }
+}
+
+
+contract B {
+    event Log(string message);
+
+    function foo() public virtual{
+        emit Log(B.foo);
+    }
+    function bar() public virtual{
+        emit Log(B.bar);
+    }
+}
+
+contract C is A,B {
+    event Log(string message);
+
+    function foo() public override(A,B){
+        emit Log(C.foo);
+        //calls A's Foo function only
+        A.foo()
+    }
+    function bar() public override(A,B){
+        emit Log(C.bar);
+
+        //calls all the parents(both A and B) bar function
+        super.bar()
+    }
+}

@@ -1,0 +1,28 @@
+                        4.View vs pure
+
+
+view Vs pure
+    --> both are not able to add or modify the block.
+    --> but view function can read the data from the blockChain(State Variable)
+    --> pure function cannot read data from the blockChain
+
+
+  Example   
+
+    pragma solidity ^0.8.7
+
+    contract ViewAndPureFunction{
+
+        uint public num = 10;
+
+        function viewFunc() external view returns(uint){
+
+            //can read the state Variable
+            return num;
+        }
+
+        function viewFunc() external pure returns(uint){
+            //can't read the state Variable
+            return 1;
+        }
+    }  

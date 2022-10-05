@@ -1,0 +1,57 @@
+                                    36.keccak256
+keccak256 computes the Keccak-256 hash of the input.
+
+Some use cases are:
+
+Creating a deterministic unique ID from a input
+Commit-Reveal scheme
+Compact cryptographic signature (by signing the hash instead of a larger input)
+
+
+
+
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.13;
+
+contract HashFunction {
+    function hash(
+        string memory _text,
+        uint _num,
+        address _addr
+    ) public pure returns (bytes32) {
+
+        //keccak256() return bytes and takes input in  bytes
+        //to convert _text, _num, _addr to a bytes
+        // to convert thera ar two methods
+        // abi.encodePacked()
+        // abi.encode()
+        // here we use abi.encodePacked() and see the differences next
+        return keccak256(abi.encodePacked(_text, _num, _addr));
+    }
+
+}
+
+
+
+difference between encode and encodePacked
+
+encode ==> converts the data into bytes and returns
+encodePacked ==> converts the data into bytes and compresses and then returns
+
+encodePacked data output is smaller compared to encode output
+
+
+// *****************************************************
+
+
+Hash Collision :
+    some times the input ar different but the hash values are same.
+    This is hash Collision. 
+Example :
+    The hash value for the input 'AAAA' and 'BBB'
+     equal to 'AAA' and 'ABBB'
+
+     To avoid hash Collision don't use same datatype
+
+     to avoid use like this
+        'AAAA',123,'BBB'

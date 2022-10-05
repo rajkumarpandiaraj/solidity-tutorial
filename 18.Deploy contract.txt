@@ -1,0 +1,166 @@
+                    18.Deploy contract
+
+going to deploy other contract from one contract by call some function
+                    
+
+
+pragma solidity ^0.8.7;
+
+contract TestContract1 {
+    address public owner = msg.sender;
+
+    function setOwner(address _owner) public {
+        require(msg.sender == owner, "not owner");
+        owner = _owner;
+    }
+}
+
+contract TestContract2 {
+    address public owner = msg.sender;
+    uint public value = msg.value;
+    uint public x;
+    uint public y;
+
+    constructor(uint _x, uint _y) payable {
+        x = _x;
+        y = _y;
+    }
+}
+
+
+
+
+contract Proxy{
+
+    //going to emit the event Deploy,
+    //Once the contract is deployed 
+    event Deploy(address)
+
+    //we are going to call the function with contract's address to deploy the contract
+    //_code takes contract byteCode
+    //payable, since it uses some eth to deploy the contract
+    //going to return address of the deployed contract
+
+    function deploy(bytes memory _code) external payable return(address addr){
+
+        //To deploy contract, going to use assembly
+        assembly{
+
+            //going to call the function Create
+            //create(v, p, n)
+            //v = amount of ETH to send
+            //p = pointer in memory to start of code
+            //n = size of code
+
+            addr = create(callvalue(), add(_code, 0x20), mload(_code))
+            
+            //callvalue() return the amout of ETH sent to deply the contract.
+            //add(_code, 0x20) first 32byte of the code holds the size of the contract
+                //so, telling the start after the 32bytes
+                //0x20 is the hexa decimal value of the 32B
+            //mload(_code) loads the first 32byte if the cide which is 
+                //size of the contract
+
+              //create() return the address
+              //store and return the address in addr  
+
+        }
+
+        //going to check addr is not an zero address
+        //create() return zero address, if the deployment is failed
+
+        require(addr != address(0),'deploy Failed')
+
+        //if addr is not equal to address(0),
+        //then going to emit the Deploy event
+
+        emit Deploy(addr)
+    }
+}
+
+
+
+
+
+
+
+
+full example
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.13;
+
+contract Proxy {
+    event Deploy(address);
+
+    fallback() external payable {}
+
+    function deploy(bytes memory _code) external payable returns (address addr) {
+        assembly {
+            // create(v, p, n)
+            // v = amount of ETH to send
+            // p = pointer in memory to start of code
+            // n = size of code
+            addr := create(callvalue(), add(_code, 0x20), mload(_code))
+        }
+        // return address 0 on error
+        require(addr != address(0), "deploy failed");
+
+        emit Deploy(addr);
+    }
+
+    function execute(address _target, bytes memory _data) external payable {
+        (bool success, ) = _target.call{value: msg.value}(_data);
+        require(success, "failed");
+    }
+}
+
+contract TestContract1 {
+    address public owner = msg.sender;
+
+    function setOwner(address _owner) public {
+        require(msg.sender == owner, "not owner");
+        owner = _owner;
+    }
+}
+
+contract TestContract2 {
+    address public owner = msg.sender;
+    uint public value = msg.value;
+    uint public x;
+    uint public y;
+
+    constructor(uint _x, uint _y) payable {
+        x = _x;
+        y = _y;
+    }
+}
+
+contract Helper {
+    //get the bytecode pf TestContract1 by calling this function
+    function getBytecode1() external pure returns (bytes memory) {
+        bytes memory bytecode = type(TestContract1).creationCode;
+        return bytecode;
+    }
+
+    //get the bytecode pf TestContract2 by calling this function
+    function getBytecode2(uint _x, uint _y) external pure returns (bytes memory) {
+        bytes memory bytecode = type(TestContract2).creationCode;
+        //encoding the constructor inputs
+        return abi.encodePacked(bytecode, abi.encode(_x, _y));
+    }
+
+    function getCalldata(address _owner) external pure returns (bytes memory) {
+        return abi.encodeWithSignature("setOwner(address)", _owner);
+    }
+}
+
+
+link : https://www.youtube.com/watch?v=YbRGTF1OGdM&list=PLO5VPQH6OWdVQwpQfw9rZ67O6Pjfo6q-p&index=26
+
+
+
+
+
+
+
+

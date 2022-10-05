@@ -1,0 +1,39 @@
+                        15.Iterable mapping
+
+You cannot iterate through a mapping.
+So here is an example of how to create an iterable mapping.
+
+
+//we are going to maintain array of keys to 
+//check the lengthof the key and to iterate through the obj
+
+
+pragma solidity ^0.8.7;
+
+contract IterableMapping {
+
+    mapping(address => uint) public balances;
+    mapping(address => nool) public inserted;
+    address[] public keys;
+
+    function set(address _key, uint _val) external {
+        balances[_keys] = _val;
+
+        if(!inserted[_key]){
+            inserted[_key] =  true;
+            keys.push(_key);
+        }
+    }
+
+    function getSize() external view returns(uint){
+        return keys.length
+    }
+
+
+    function get(uint _i) external view returns(uint){
+        return balances[keys[_i]];
+    }
+    
+
+}
+

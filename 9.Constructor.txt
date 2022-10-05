@@ -1,0 +1,24 @@
+                        9.Constructor
+
+
+A constructor is an optional function that is executed upon contract creation.
+Constructor is the function called only once,
+When the smart contract is deployed.
+It is mainly used to initialize the StateVariable
+
+
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.13;
+
+// Base contract X
+contract X {
+    string public name;
+
+    constructor(string _name) {
+        name = _name;
+    }
+
+}
+
+remix excepts constructor input while deployingthe function.
+

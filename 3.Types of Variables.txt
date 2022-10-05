@@ -1,0 +1,70 @@
+                       3.Types of Variables
+
+
+There are three types of variables:
+    1.State Variables
+    2.Local Variables
+    3.Global Variables
+
+1.State Variables
+    The variables inside the contract and outside function.
+    value stored in the State Variable are stored in block chain
+
+
+Example
+
+    pragma solidity ^0.8.7
+
+    contract StateVariables{
+        //StateVariables
+        uint public a = 20
+    }
+
+//////////////////////////////////////////
+2.Local Variables:
+    The varibles declared inside the function are Local Variables
+    Values store in the variable and the variable gets destroyed once the function gets executed.
+
+
+Example
+
+    pragma solidity ^0.8.7
+
+    contract StateVariables{
+        //StateVariables
+        uint public a = 20;
+
+        function foo() external {
+            //Local Variable
+             unit 1 = 10;
+            bool b = false
+
+        }
+    }
+
+If we deploy this smart contract we can see 
+foo function and
+a StateVariable only
+
+
+//////////////////////////////////////////////////////
+3.Global Variables :
+    It is used to store the blockChain, transaction, etc..,
+    The some of the global variables are
+        msg.sender ---> address of the sender
+        block.timeStamp --> timeStamp
+        block.number --> number of the block
+
+Example 
+    pragma solidity ^0.8.7
+
+    contract GlobalVariables{
+        function globalVar() external view returns(address, uint, uint){
+            //storing the GlobalVariables in some other variables
+            address sender = msg.sender;
+            uint timeStamp = block.timeStamp
+            uint blockNum = block.number
+
+            return (sender, timeStamp, blockNum)
+        }
+    }

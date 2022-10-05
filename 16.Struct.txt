@@ -1,0 +1,46 @@
+                        16.Struct
+
+struct is used to group the data.
+
+pragma solidity ^0.8.7;
+contract Structs{
+    struct Car{
+        string model;
+        uin year;
+        address owner;
+    }
+
+
+    //declaration
+    Car public car;
+    Car[] public cars;
+    mapping(address => Car[]) public carsBYOwner;
+
+
+    function examples() external {
+        //Initialization
+
+        //firstWay
+        //Should in same order in this case
+        Car memory toyota =  Car('Toyota',1990,msg.sender);
+        
+        //secondWay
+        //not need to be in order
+        car memory lambo = Car({year : 1998,model:'lambo',owner : msg.sender});
+
+        //thirdWay
+        Car memory tesla;
+
+        tesla.model = "Telsa";
+        tesla.year = 2020;
+        tesla.Owner = msg.sender;
+
+        cars.push(toyota);
+        cars.push(lambo);
+        cars.push(tesla);
+
+        cars.push('ferrari','1987',msg.sender);
+        
+        delete cars[1]; //set it to default value;
+    }
+}

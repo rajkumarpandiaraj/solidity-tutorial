@@ -1,0 +1,93 @@
+                                21.Inheritance (is, [virtual,override])
+
+
+
+pragma solidity ^0.8.9;
+
+contract A {
+
+    // vitrual keyword allows the child to modify the function
+    function foo() public pure virtual returns(string){
+        return 'A-F'
+    } 
+
+    function bar() public pure virtual returns(string){
+        return 'A-bar'
+    } 
+
+    function baz() public pure returns(string){
+        return 'A-baz'
+    } 
+}
+
+contract B is A {
+
+    //override keyword allows to override the parent function
+    function foo() public pure override returns(string){
+        return 'B-F'
+    } 
+
+    function bar() public pure override returns(string){
+        return 'B-bar'
+    } 
+}
+
+
+output :
+    if we deploy the contract B we have
+        foo ==> B-F
+        bar ==> B-bar
+        baz ==> A-baz
+
+// *****************************************
+
+overriding the B's inherited function in B's Chilc C
+
+Example :
+    contract A {
+
+    // vitrual keyword allows the child to modify the function
+    function foo() public pure virtual returns(string){
+        return 'A-F'
+    } 
+
+    function bar() public pure virtual returns(string){
+        return 'A-bar'
+    } 
+
+    function baz() public pure returns(string){
+        return 'A-baz'
+    } 
+}
+
+contract B is A {
+
+    //override keyword allows to override the parent function
+    //since we want to ovverride this function in its child, we adding virtual keyword
+    function foo() public pure virtual override returns(string){
+        return 'B-F'
+    } 
+
+    function bar() public pure virtual override returns(string){
+        return 'B-bar'
+    } 
+}
+
+
+contract C is B {
+
+    //override keyword allows to override the parent function
+    function foo() public pure override returns(string){
+        return 'C-F'
+    } 
+
+    function bar() public pure override returns(string){
+        return 'C-bar'
+    } 
+}
+
+output :
+    if we deploy the contract C we have
+        foo ==> C-F
+        bar ==> C-bar
+        baz ==> A-baz
