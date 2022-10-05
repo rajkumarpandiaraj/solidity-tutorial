@@ -23,7 +23,7 @@ contract AbiEncode {
         external
         pure
         returns (bytes memory)
-    {
+    { 
         // Typo is not checked - "transfer(address, uint)"
         return abi.encodeWithSignature("transfer(address,uint256)", to, amount);
     }
